@@ -1,9 +1,15 @@
 import React from "react";
 
-import { Container } from "./styles";
+import { Container, ContentContainer, Title } from "./styles";
 
-function Deader() {
-  return <Container> Hello World</Container>;
+function Header() {
+  return (
+    <Container>
+      <ContentContainer>
+        <Title>Your Business Here</Title>
+      </ContentContainer>
+    </Container>
+  );
 }
 
-export default Deader;
+export default Header;
