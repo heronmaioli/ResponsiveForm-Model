@@ -4,9 +4,8 @@ export default createGlobalStyle`
 
 *{
     margin: 0;
-    padding: 0;
+    padding: 0;    
     border: 0;
-    
 }
 body{
     width: 100%;

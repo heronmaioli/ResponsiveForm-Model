@@ -1,36 +1,44 @@
-import React from "react";
-
+import React, { useState } from "react";
 import {
   Container,
   ContentContainer,
   FormCotainer,
   PageTitle,
-  TheForm,
+  RadiosContainer,
+  RadioInput,
+  Label,
 } from "./styles";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-const schema = yup.object().shape({
-  firstName: yup.string().required(),
-  age: yup.number().positive().integer().required(),
-});
+import PersonForm from "./PersonForm";
+import BusinessForm from "./BusinessForm";
 
 function SignUpForm() {
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
-  });
-  const onSubmit = (data) => console.log(data);
+  const [Conditional, setConditional] = useState("Business");
+
   return (
     <Container>
       <ContentContainer>
         <PageTitle>Sign Up</PageTitle>
         <FormCotainer>
-          <TheForm onSubmit={handleSubmit(onSubmit)}>
-            <input type="text" name="firstName" ref={register} />
-            <p>{errors.firstName?.message}</p>
-            <input type="submit" />
-          </TheForm>
+          <RadiosContainer>
+            <RadioInput
+              type="radio"
+              id="physical"
+              name="custumerType"
+              onClick={() => setConditional("Physical")}
+              defaultChecked={true}
+            />
+            <Label htmlFor="physical">Physical</Label>
+            <RadioInput
+              type="radio"
+              id="business"
+              name="custumerType"
+              onClick={() => setConditional("Business")}
+            />
+            <Label htmlFor="business">Business</Label>
+          </RadiosContainer>
+
+          {Conditional === "Physical" && <PersonForm />}
+          {Conditional === "Business" && <BusinessForm />}
         </FormCotainer>
       </ContentContainer>
     </Container>
