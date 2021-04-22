@@ -7,53 +7,44 @@ import * as yup from "yup";
 const schema = yup.object().shape({
   name: yup
     .string()
-    .required("Your name is required for sign up")
-    .min(3, "Your name must to be at least 3 letters long")
+    .required("Required")
     .matches(
       /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/,
       "Your name must to contain only letters"
-    ),
+    )
+    .min(6, "Too short! Min 6"),
   email: yup
     .string()
-    .email("This field must to be an email")
-    .required("Your email is required for sign up")
-    .min(6, "Your email must to be at least 6 letters long"),
+    .email("This field must to be in email format")
+    .required("Required")
+    .min(6, "Too short! Min 6"),
   phoneNumber: yup
     .string()
-    .required("Your phone is required for sign up")
-    .min(9, "Too short")
-    .max(14, "Too long")
-    .matches(/^[0-9&-()]*$/, "Only number are allowed"),
-
+    .required("Required")
+    .min(10, "Too short. Min 10")
+    .max(14, "Too long! Max 14"),
   ein: yup
     .string()
-    .required("Your EIN is required for sign up")
-    .matches(/\d/g, "Only number are allowed"),
-  postalCode: yup
+    .required("Requidred")
+    .min(9, "Too short! Min 9")
+    .max(10, "Too long! Max 10"),
+  zipCode: yup
     .string()
-    .required("Your postal code is required for sign up")
-    .matches(/\d/g, "Only number are allowed")
-    .min(5, "Too short")
-    .max(10, "Too long"),
-  adress: yup
-    .string()
-    .required("Your adress confirmation is required for sign up")
-    .matches(/\D/g, "Your adress must to contain only letters"),
-  number: yup
-    .string()
-    .required("Your adress number is required for sign up")
-    .matches(/\d/g, "Only number are allowed"),
+    .required("Required")
+    .min(9, "Too short! Min 9")
+    .max(10, "Too long! Max 10"),
+  adress: yup.string().required("Required").min(6, "Too short! Min 6"),
   password: yup
     .string()
-    .required("Your password is required for sign up")
-    .min(8, "Your password must to be at least 8 letters long")
+    .required("Required")
+    .min(8, "Too short! Min 8")
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]/,
       "Your password must to contain letters and numbers"
     ),
   confPassword: yup
     .string()
-    .required("Your password confirmation is required for sign up")
+    .required("Required")
     .oneOf([yup.ref("password"), null], "Do not match"),
 });
 
@@ -70,14 +61,22 @@ function BusinessForm() {
     console.log("erro" + JSON.stringify(data));
   };
 
+  function mask(value, pattern) {
+    let i = 0;
+    const v = value.toString();
+
+    return v !== "" ? pattern.replace(/#/g, () => v[i++] || "") : "";
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <InputsContainer>
-          <InputTitle>Name:</InputTitle>
+          <InputTitle>Full Name:</InputTitle>
           <FormInput
             type="text"
             name="name"
+            placeholder="Jhon Smith"
             ref={register}
             error={errors.name?.type}
           />
@@ -87,6 +86,7 @@ function BusinessForm() {
           <FormInput
             type="text"
             name="email"
+            placeholder="exemple@exemple.com"
             ref={register}
             error={errors.email?.type}
           />
@@ -96,15 +96,15 @@ function BusinessForm() {
           <FormInput
             type="tel"
             name="phoneNumber"
+            placeholder="(xxx) xxx-xxxx"
             ref={register}
             error={errors.phoneNumber?.type}
-            autoComplete={"off"}
-            onChange={(e) => {
-              e.target.value = e.target.value.replace(
-                /^(\d{3})(\d{3})(\d)/,
-                "($1) $2-$3"
-              );
+            onBlur={(e) => {
+              e.target.value = mask(e.target.value, "(###) ###-#####");
             }}
+            onChange={(e) =>
+              (e.target.value = e.target.value.replace(/\D/g, ""))
+            }
           />
           <ErrorMsg>{errors.phoneNumber?.message}</ErrorMsg>
 
@@ -112,41 +112,50 @@ function BusinessForm() {
           <FormInput
             type="text"
             name="ein"
+            placeholder="xx-xxxxxxx"
+            autoComplete={"off"}
             ref={register}
             error={errors.ein?.type}
+            onBlur={(e) => {
+              e.target.value = mask(e.target.value, "##-#######");
+            }}
+            onChange={(e) =>
+              (e.target.value = e.target.value.replace(/\D/g, ""))
+            }
           />
           <ErrorMsg>{errors.ein?.message}</ErrorMsg>
 
-          <InputTitle>Postal code:</InputTitle>
+          <InputTitle>Zip code:</InputTitle>
           <FormInput
             type="text"
-            name="postalCode"
+            name="zipCode"
+            placeholder="xxxxx-xxxx"
             ref={register}
-            error={errors.postalCode?.type}
+            error={errors.zipCode?.type}
+            onBlur={(e) => {
+              e.target.value = mask(e.target.value, "#####-####");
+            }}
+            onChange={(e) =>
+              (e.target.value = e.target.value.replace(/\D/g, ""))
+            }
           />
-          <ErrorMsg>{errors.postalCode?.message}</ErrorMsg>
+          <ErrorMsg>{errors.zipCode?.message}</ErrorMsg>
 
           <InputTitle>Adress:</InputTitle>
           <FormInput
             type="text"
             name="adress"
+            placeholder="250 5th Ave, Apt. #111, New York, NY..."
             ref={register}
             error={errors.adress?.type}
           />
           <ErrorMsg>{errors.adress?.message}</ErrorMsg>
 
-          <InputTitle>Number:</InputTitle>
-          <FormInput
-            type="text"
-            name="number"
-            ref={register}
-            error={errors.number?.type}
-          />
-          <ErrorMsg>{errors.number?.message}</ErrorMsg>
           <InputTitle>Password:</InputTitle>
           <FormInput
-            type="text"
+            type="password"
             name="password"
+            placeholder="********"
             ref={register}
             error={errors.password?.type}
           />
@@ -154,8 +163,9 @@ function BusinessForm() {
 
           <InputTitle>Password confirmation:</InputTitle>
           <FormInput
-            type="text"
+            type="password"
             name="confPassword"
+            placeholder="********"
             ref={register}
             error={errors.confPassword?.type}
           />

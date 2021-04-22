@@ -12,7 +12,7 @@ import PersonForm from "./PersonForm";
 import BusinessForm from "./BusinessForm";
 
 function SignUpForm() {
-  const [Conditional, setConditional] = useState("Business");
+  const [Conditional, setConditional] = useState("Physical");
 
   return (
     <Container>
@@ -37,8 +37,7 @@ function SignUpForm() {
             <Label htmlFor="business">Business</Label>
           </RadiosContainer>
 
-          {Conditional === "Physical" && <PersonForm />}
-          {Conditional === "Business" && <BusinessForm />}
+          {Conditional === "Physical" ? <PersonForm /> : <BusinessForm />}
         </FormCotainer>
       </ContentContainer>
     </Container>

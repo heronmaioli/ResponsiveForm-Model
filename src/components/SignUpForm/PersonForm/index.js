@@ -7,28 +7,28 @@ import * as yup from "yup";
 const schema = yup.object().shape({
   name: yup
     .string()
-    .required("Your name is required for sign up")
-    .min(3, "Your name must to be at least 3 letters long")
+    .required("Required")
+    .min(3, "Too short! Min 3")
     .matches(
       /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/,
       "Your name must to contain only letters"
     ),
   email: yup
     .string()
-    .email("This field must to be an email")
-    .required("Your email is required for sign up")
-    .min(6, "Your email must to be at least 6 letters long"),
+    .email("This field must to be in email format")
+    .required("Required")
+    .min(6, "Too short! Min 6"),
   password: yup
     .string()
-    .required("Your password is required for sign up")
-    .min(8, "Your password must to be at least 8 letters long")
+    .required("Required")
+    .min(8, "Too Short! Min 8")
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]/,
       "Your password must to contain letters and numbers"
     ),
   confPassword: yup
     .string()
-    .required("Your password confirmation is required for sign up")
+    .required("Required")
     .oneOf([yup.ref("password"), null], "Do not match"),
 });
 
@@ -52,6 +52,7 @@ function PersonForm() {
           <FormInput
             type="text"
             name="name"
+            placeholder="Jhon"
             ref={register}
             error={errors.name?.type}
           />
@@ -61,6 +62,7 @@ function PersonForm() {
           <FormInput
             type="text"
             name="email"
+            placeholder="exemple@exemple.com"
             ref={register}
             error={errors.email?.type}
           />
@@ -70,6 +72,7 @@ function PersonForm() {
           <FormInput
             type="password"
             name="password"
+            placeholder="********"
             ref={register}
             error={errors.password?.type}
           />
@@ -79,6 +82,7 @@ function PersonForm() {
           <FormInput
             type="password"
             name="confPassword"
+            placeholder="********"
             ref={register}
             error={errors.confPassword?.type}
           />
