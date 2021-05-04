@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/ResponsiveForm-Model/static/js/main.a1f9a452.chunk.js",
-    "main.js.map": "/ResponsiveForm-Model/static/js/main.a1f9a452.chunk.js.map",
+    "main.js": "/ResponsiveForm-Model/static/js/main.ed212bfe.chunk.js",
+    "main.js.map": "/ResponsiveForm-Model/static/js/main.ed212bfe.chunk.js.map",
     "runtime-main.js": "/ResponsiveForm-Model/static/js/runtime-main.3c44d49d.js",
     "runtime-main.js.map": "/ResponsiveForm-Model/static/js/runtime-main.3c44d49d.js.map",
     "static/js/2.95fac24d.chunk.js": "/ResponsiveForm-Model/static/js/2.95fac24d.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.3c44d49d.js",
     "static/js/2.95fac24d.chunk.js",
-    "static/js/main.a1f9a452.chunk.js"
+    "static/js/main.ed212bfe.chunk.js"
   ]
 }
