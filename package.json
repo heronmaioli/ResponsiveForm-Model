@@ -1,5 +1,6 @@
 {
-  "name": "real-time-validation-form",
+  "homepage": "http://heronmaioli.github.io/ResponsiveForm-Model",
+  "name": "validation-form",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +17,8 @@
     "yup": "^0.32.9"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
