@@ -4,40 +4,48 @@ import {
   ContentContainer,
   FormCotainer,
   PageTitle,
-  RadiosContainer,
-  RadioInput,
-  Label,
+  TypesContainer,
+  TypeInput,
 } from "./styles";
 import PersonForm from "./PersonForm";
 import BusinessForm from "./BusinessForm";
+import personImg from "../../images/person.jpg";
+import businessImg from "../../images/business.jpg";
 
 function SignUpForm() {
-  const [Conditional, setConditional] = useState("Physical");
+  const [Conditional, setConditional] = useState("Person");
 
   return (
     <Container>
       <ContentContainer>
         <PageTitle>Sign Up</PageTitle>
         <FormCotainer>
-          <RadiosContainer>
-            <RadioInput
-              type="radio"
-              id="physical"
+          <TypesContainer>
+            <TypeInput
+              id="Person"
               name="custumerType"
-              onClick={() => setConditional("Physical")}
-              defaultChecked={true}
-            />
-            <Label htmlFor="physical">Physical</Label>
-            <RadioInput
-              type="radio"
-              id="business"
+              onClick={() => setConditional("Person")}
+              style={{
+                backgroundImage: `url(${personImg})`,
+              }}
+              selected={Conditional}
+            >
+              Person
+            </TypeInput>
+            <TypeInput
+              id="Business"
               name="custumerType"
               onClick={() => setConditional("Business")}
-            />
-            <Label htmlFor="business">Business</Label>
-          </RadiosContainer>
+              style={{
+                backgroundImage: `url(${businessImg})`,
+              }}
+              selected={Conditional}
+            >
+              Business
+            </TypeInput>
+          </TypesContainer>
 
-          {Conditional === "Physical" ? <PersonForm /> : <BusinessForm />}
+          {Conditional === "Person" ? <PersonForm /> : <BusinessForm />}
         </FormCotainer>
       </ContentContainer>
     </Container>

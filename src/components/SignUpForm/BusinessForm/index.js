@@ -1,5 +1,12 @@
 import React from "react";
-import { FormInput, InputsContainer, ErrorMsg, InputTitle } from "../styles";
+import {
+  Input,
+  InsideFormContainer,
+  ButtonsContainer,
+  InputBox,
+  ErrorMsg,
+  InputTitle,
+} from "../styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -70,109 +77,131 @@ function BusinessForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit, onError)}>
-        <InputsContainer>
-          <InputTitle>Full Name:</InputTitle>
-          <FormInput
-            type="text"
-            name="name"
-            placeholder="Jhon Smith"
-            ref={register}
-            error={errors.name?.type}
-          />
-          <ErrorMsg>{errors.name?.message}</ErrorMsg>
+      <form
+        onSubmit={handleSubmit(onSubmit, onError)}
+        style={{ width: "100%" }}
+      >
+        <InsideFormContainer>
+          <InputBox>
+            <InputTitle>Full Name:</InputTitle>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Jhon Smith"
+              ref={register}
+              error={errors.name?.type}
+            />
+            <ErrorMsg>{errors.name?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>Email:</InputTitle>
-          <FormInput
-            type="text"
-            name="email"
-            placeholder="exemple@exemple.com"
-            ref={register}
-            error={errors.email?.type}
-          />
-          <ErrorMsg>{errors.email?.message}</ErrorMsg>
+          <InputBox>
+            <InputTitle>Email:</InputTitle>
+            <Input
+              type="text"
+              name="email"
+              placeholder="exemple@exemple.com"
+              ref={register}
+              error={errors.email?.type}
+            />
+            <ErrorMsg>{errors.email?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>Phone:</InputTitle>
-          <FormInput
-            type="tel"
-            name="phoneNumber"
-            placeholder="(xxx) xxx-xxxx"
-            ref={register}
-            error={errors.phoneNumber?.type}
-            onBlur={(e) => {
-              e.target.value = mask(e.target.value, "(###) ###-#####");
-            }}
-            onChange={(e) =>
-              (e.target.value = e.target.value.replace(/\D/g, ""))
-            }
-          />
-          <ErrorMsg>{errors.phoneNumber?.message}</ErrorMsg>
+          <InputBox>
+            <InputTitle>Phone:</InputTitle>
+            <Input
+              type="tel"
+              name="phoneNumber"
+              placeholder="(xxx) xxx-xxxx"
+              ref={register}
+              error={errors.phoneNumber?.type}
+              onBlur={(e) => {
+                e.target.value = mask(e.target.value, "(###) ###-#####");
+              }}
+              onChange={(e) =>
+                (e.target.value = e.target.value.replace(/\D/g, ""))
+              }
+            />
+            <ErrorMsg>{errors.phoneNumber?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>EIN:</InputTitle>
-          <FormInput
-            type="text"
-            name="ein"
-            placeholder="xx-xxxxxxx"
-            autoComplete={"off"}
-            ref={register}
-            error={errors.ein?.type}
-            onBlur={(e) => {
-              e.target.value = mask(e.target.value, "##-#######");
-            }}
-            onChange={(e) =>
-              (e.target.value = e.target.value.replace(/\D/g, ""))
-            }
-          />
-          <ErrorMsg>{errors.ein?.message}</ErrorMsg>
+          <InputBox>
+            <InputTitle>EIN:</InputTitle>
+            <Input
+              type="text"
+              name="ein"
+              placeholder="xx-xxxxxxx"
+              autoComplete={"off"}
+              ref={register}
+              error={errors.ein?.type}
+              onBlur={(e) => {
+                e.target.value = mask(e.target.value, "##-#######");
+              }}
+              onChange={(e) =>
+                (e.target.value = e.target.value.replace(/\D/g, ""))
+              }
+            />
+            <ErrorMsg>{errors.ein?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>Zip code:</InputTitle>
-          <FormInput
-            type="text"
-            name="zipCode"
-            placeholder="xxxxx-xxxx"
-            ref={register}
-            error={errors.zipCode?.type}
-            onBlur={(e) => {
-              e.target.value = mask(e.target.value, "#####-####");
-            }}
-            onChange={(e) =>
-              (e.target.value = e.target.value.replace(/\D/g, ""))
-            }
-          />
-          <ErrorMsg>{errors.zipCode?.message}</ErrorMsg>
+          <InputBox>
+            <InputTitle>Zip code:</InputTitle>
+            <Input
+              type="text"
+              name="zipCode"
+              placeholder="xxxxx-xxxx"
+              ref={register}
+              error={errors.zipCode?.type}
+              onBlur={(e) => {
+                e.target.value = mask(e.target.value, "#####-####");
+              }}
+              onChange={(e) =>
+                (e.target.value = e.target.value.replace(/\D/g, ""))
+              }
+            />
+            <ErrorMsg>{errors.zipCode?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>Adress:</InputTitle>
-          <FormInput
-            type="text"
-            name="adress"
-            placeholder="250 5th Ave, Apt. #111, New York, NY..."
-            ref={register}
-            error={errors.adress?.type}
-          />
-          <ErrorMsg>{errors.adress?.message}</ErrorMsg>
+          <InputBox>
+            <InputTitle>Adress:</InputTitle>
+            <Input
+              type="text"
+              name="adress"
+              placeholder="250 5th Ave, Apt. #111, New York, NY..."
+              ref={register}
+              error={errors.adress?.type}
+            />
+            <ErrorMsg>{errors.adress?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>Password:</InputTitle>
-          <FormInput
-            type="password"
-            name="password"
-            placeholder="********"
-            ref={register}
-            error={errors.password?.type}
-          />
-          <ErrorMsg>{errors.password?.message}</ErrorMsg>
+          <InputBox>
+            <InputTitle>Password:</InputTitle>
+            <Input
+              type="password"
+              name="password"
+              placeholder="********"
+              ref={register}
+              error={errors.password?.type}
+            />
+            <ErrorMsg>{errors.password?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>Password confirmation:</InputTitle>
-          <FormInput
-            type="password"
-            name="confPassword"
-            placeholder="********"
-            ref={register}
-            error={errors.confPassword?.type}
-          />
-          <ErrorMsg>{errors.confPassword?.message}</ErrorMsg>
-        </InputsContainer>
-        <input type="submit" />
-        <button onClick={reset}>Cancel</button>
+          <InputBox>
+            <InputTitle>Password confirmation:</InputTitle>
+            <Input
+              type="password"
+              name="confPassword"
+              placeholder="********"
+              ref={register}
+              error={errors.confPassword?.type}
+            />
+            <ErrorMsg>{errors.confPassword?.message}</ErrorMsg>
+          </InputBox>
+
+          <ButtonsContainer>
+            <button type="submit">Submit </button>
+            <button onClick={reset}>Cancel</button>
+          </ButtonsContainer>
+        </InsideFormContainer>
       </form>
     </>
   );

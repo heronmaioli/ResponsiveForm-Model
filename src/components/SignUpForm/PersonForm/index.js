@@ -1,5 +1,12 @@
 import React from "react";
-import { FormInput, InputsContainer, ErrorMsg, InputTitle } from "../styles";
+import {
+  Input,
+  InsideFormContainer,
+  InputBox,
+  ErrorMsg,
+  ButtonsContainer,
+  InputTitle,
+} from "../styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -46,50 +53,64 @@ function PersonForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit, onError)}>
-        <InputsContainer>
-          <InputTitle>Name:</InputTitle>
-          <FormInput
-            type="text"
-            name="name"
-            placeholder="Jhon"
-            ref={register}
-            error={errors.name?.type}
-          />
-          <ErrorMsg>{errors.name?.message}</ErrorMsg>
+      <form
+        onSubmit={handleSubmit(onSubmit, onError)}
+        style={{ width: "100%" }}
+      >
+        <InsideFormContainer>
+          <InputBox>
+            <InputTitle>Name:</InputTitle>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Jhon"
+              ref={register}
+              error={errors.name?.type}
+            />
+            <ErrorMsg>{errors.name?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>Email:</InputTitle>
-          <FormInput
-            type="text"
-            name="email"
-            placeholder="exemple@exemple.com"
-            ref={register}
-            error={errors.email?.type}
-          />
-          <ErrorMsg>{errors.email?.message}</ErrorMsg>
+          <InputBox>
+            <InputTitle>Email:</InputTitle>
+            <Input
+              type="text"
+              name="email"
+              placeholder="exemple@exemple.com"
+              ref={register}
+              error={errors.email?.type}
+            />
+            <ErrorMsg>{errors.email?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>Password:</InputTitle>
-          <FormInput
-            type="password"
-            name="password"
-            placeholder="********"
-            ref={register}
-            error={errors.password?.type}
-          />
-          <ErrorMsg>{errors.password?.message}</ErrorMsg>
+          <InputBox>
+            <InputTitle>Password:</InputTitle>
+            <Input
+              type="password"
+              name="password"
+              placeholder="********"
+              ref={register}
+              error={errors.password?.type}
+            />
+            <ErrorMsg>{errors.password?.message}</ErrorMsg>
+          </InputBox>
 
-          <InputTitle>Password confirmation:</InputTitle>
-          <FormInput
-            type="password"
-            name="confPassword"
-            placeholder="********"
-            ref={register}
-            error={errors.confPassword?.type}
-          />
-          <ErrorMsg>{errors.confPassword?.message}</ErrorMsg>
-        </InputsContainer>
-        <input type="submit" />
-        <button onClick={reset}>Cancel</button>
+          <InputBox>
+            <InputTitle>Password confirmation:</InputTitle>
+            <Input
+              type="password"
+              name="confPassword"
+              placeholder="********"
+              ref={register}
+              error={errors.confPassword?.type}
+            />
+            <ErrorMsg>{errors.confPassword?.message}</ErrorMsg>
+          </InputBox>
+
+          <ButtonsContainer>
+            <button type="submit">Submit </button>
+            <button onClick={reset}>Cancel</button>
+          </ButtonsContainer>
+        </InsideFormContainer>
       </form>
     </>
   );
