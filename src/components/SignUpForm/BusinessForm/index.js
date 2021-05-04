@@ -61,7 +61,10 @@ function BusinessForm() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    alert(
+      `Thanks to test my App ${data.name}! This is very important to me!!!`
+    );
+    reset();
   };
 
   const onError = (data) => {

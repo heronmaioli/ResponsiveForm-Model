@@ -44,7 +44,9 @@ function PersonForm() {
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
-    console.log(data);
+    alert(
+      `Thanks to test my App ${data.name}! This is very important to me!!!`
+    );
   };
 
   const onError = (data) => {
